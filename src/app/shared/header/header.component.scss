@@ -1,0 +1,31 @@
+.header{
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  &__logo-box{
+    display: flex;
+    align-items: center;
+    padding-bottom: 3rem;
+  }
+  &__logo{
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    font-size: 3.5rem;
+  }
+
+  &__nav{
+    display: flex;
+    justify-content: center;
+  }
+
+  &__link{
+    text-decoration: none;
+    color: inherit;
+    font-size: 2rem;
+
+    &:hover{
+      color: red;
+    }
+  }
+}
