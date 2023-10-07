@@ -3,6 +3,8 @@ import {Olympic} from "../../../core/models/Olympic";
 import {ChartType} from "../../../core/enums/chart-types.enum";
 import {PieSerie} from "../../../core/interfaces/series/pie-serie";
 import {StatContent} from "../../../core/interfaces/stat-content";
+import {SeriesOptionsType} from "highcharts";
+import {Router} from "@angular/router";
 
 @Component({
   selector: "app-pie-chart",
@@ -12,14 +14,16 @@ import {StatContent} from "../../../core/interfaces/stat-content";
 export class PieChartComponent implements OnInit{
   @Input() data: Olympic[] | undefined;
   type = ChartType.Pie;
-  series: PieSerie[] = [];
+  series: SeriesOptionsType = {} as SeriesOptionsType;
   title: string = "Medals per Country";
   subtitle: string = "";
   numberOfJOs: number = 0;
   numberOfCountries: number = 0;
   stats: StatContent[] = [];
+  a:  SeriesOptionsType[] = [];
 
-
+  constructor(private router: Router) {
+  }
   ngOnInit() {
     if(this.data){
       this.series = this.getSeries(this.data);
@@ -27,17 +31,29 @@ export class PieChartComponent implements OnInit{
     }
   }
 
-  getSeries(data: Olympic[]): PieSerie[]{
-    const series: PieSerie[] = [];
+  getSeries(data: Olympic[]): SeriesOptionsType{
+    const dataSeries: PieSerie[] = [];
       data.forEach((data: Olympic) => {
         const medalsCount = data.participations.reduce((acc, participation) => acc + participation.medalsCount,0)
         const serie: PieSerie = {
+          id: data.id.toString(),
           name: data.country,
           y: medalsCount
         }
-        series.push(serie)
+        dataSeries.push(serie)
       })
-    return series;
+
+    const series: SeriesOptionsType= {
+      type: this.type,
+      data: dataSeries,
+      events: {
+        click: e => {
+          const {id} = e.point.options;
+          this.router.navigate(["/country", id])
+        }
+      },
+    }
+    return  series
   }
 
   getStats(): StatContent[]{

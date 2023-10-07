@@ -8,9 +8,10 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { ChartComponent } from './shared/chart/chart.component';
 import {PieChartComponent} from "./shared/chart/pie-chart/pie-chart.component";
+import {DetailComponent} from "./pages/detail/detail.component";
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NotFoundComponent, HeaderComponent, ChartComponent, PieChartComponent],
+  declarations: [AppComponent, HomeComponent, NotFoundComponent, HeaderComponent, ChartComponent, PieChartComponent, DetailComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
