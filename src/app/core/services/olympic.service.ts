@@ -31,4 +31,14 @@ export class OlympicService {
   getOlympics() {
     return this.olympics$.asObservable();
   }
+
+  getOlympicById(id: number){
+    return this.getOlympics().pipe(
+      map(olympics => {
+        if(olympics){
+          return olympics.find((olympic: Olympic) => olympic.id === id);
+        }
+      })
+    )
+  }
 }
