@@ -5,13 +5,14 @@ import {PieSerie} from "../../../core/interfaces/series/pie-serie";
 import {StatContent} from "../../../core/interfaces/stat-content";
 import {SeriesOptionsType} from "highcharts";
 import {Router} from "@angular/router";
+import {CommonChartAbstract} from "../common-chart.abstract";
 
 @Component({
   selector: "app-pie-chart",
   templateUrl: "pie-chart.component.html",
   styleUrls: ["pie-chart.component.scss"]
 })
-export class PieChartComponent implements OnInit{
+export class PieChartComponent implements OnInit, CommonChartAbstract{
   @Input() data: Olympic[] | undefined;
   type = ChartType.Pie;
   series: SeriesOptionsType = {} as SeriesOptionsType;
@@ -72,6 +73,15 @@ export class PieChartComponent implements OnInit{
     ]
   }
 
+  getSubtitles(): string{
+    this.stats = this.getStats();
+    let html = "";
+    this.stats.forEach((stat: StatContent) => {
+      html += `<div class="stat"> <span class="stat__title">${stat.title}</span> <span class="stat__value">${stat.value}</span></div>`
+    })
+    return html;
+  }
+
   getNumberOfJOs(): number{
     if(this.data){
       const numberOfParticipationPerCountry: number[] = [];
@@ -82,15 +92,5 @@ export class PieChartComponent implements OnInit{
     }else{
       return 0
     }
-  }
-
-  getSubtitles(){
-    this.stats = this.getStats();
-    let html = "";
-    this.stats.forEach((stat: StatContent) => {
-      html += `<div class="stat"> <span class="stat__title">${stat.title}</span> <span class="stat__value">${stat.value}</span></div>`
-    })
-    console.log(html)
-    return html;
   }
 }
