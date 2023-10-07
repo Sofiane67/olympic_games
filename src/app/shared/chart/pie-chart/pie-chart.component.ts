@@ -6,6 +6,7 @@ import {StatContent} from "../../../core/interfaces/stat-content";
 import {SeriesOptionsType} from "highcharts";
 import {Router} from "@angular/router";
 import {CommonChartAbstract} from "../common-chart.abstract";
+import {buildSubtitle} from "../../../core/utils/functions";
 
 @Component({
   selector: "app-pie-chart",
@@ -20,15 +21,13 @@ export class PieChartComponent implements OnInit, CommonChartAbstract{
   subtitle: string = "";
   numberOfJOs: number = 0;
   numberOfCountries: number = 0;
-  stats: StatContent[] = [];
-  a:  SeriesOptionsType[] = [];
 
   constructor(private router: Router) {
   }
   ngOnInit() {
     if(this.data){
       this.series = this.getSeries(this.data);
-      this.subtitle = this.getSubtitles();
+      this.subtitle = this.getSubtitles(this.getStats());
     }
   }
 
@@ -73,13 +72,8 @@ export class PieChartComponent implements OnInit, CommonChartAbstract{
     ]
   }
 
-  getSubtitles(): string{
-    this.stats = this.getStats();
-    let html = "";
-    this.stats.forEach((stat: StatContent) => {
-      html += `<div class="stat"> <span class="stat__title">${stat.title}</span> <span class="stat__value">${stat.value}</span></div>`
-    })
-    return html;
+  getSubtitles(stats: StatContent[]): string{
+    return buildSubtitle(stats)
   }
 
   getNumberOfJOs(): number{
