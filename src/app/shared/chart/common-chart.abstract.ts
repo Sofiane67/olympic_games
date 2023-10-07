@@ -4,7 +4,7 @@ import {StatContent} from "../../core/interfaces/stat-content";
 import {ChartType} from "../../core/enums/chart-types.enum";
 
 export abstract class CommonChartAbstract{
-  abstract  data: Olympic[] | undefined;
+  abstract  data: Olympic[] | Olympic | undefined;
   abstract type: ChartType;
   abstract series: SeriesOptionsType;
   abstract title: string;

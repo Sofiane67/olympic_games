@@ -13,6 +13,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() series: SeriesOptionsType = {} as SeriesOptionsType;
   @Input() title: string | undefined;
   @Input() subtitle: string | undefined;
+  @Input() options?: Options;
   chartOptions! : Options
 
   constructor(private el: ElementRef) { }
@@ -42,6 +43,10 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
         useHTML: true,
       },
       series: [this.series]
+    }
+
+    if(this.options){
+      this.chartOptions = {...this.chartOptions, ...this.options};
     }
   }
 

@@ -11,10 +11,6 @@ import {Olympic} from "../../core/models/Olympic";
   styleUrls: ['./detail.component.scss']
 })
 export class DetailComponent implements OnInit {
-  type = ChartType.Line;
-  series: SeriesOptionsType = {} as SeriesOptionsType;
-  title: string = "";
-  subtitle: string = "";
   id: string | null = "";
   olympic: Olympic = {} as Olympic;
 

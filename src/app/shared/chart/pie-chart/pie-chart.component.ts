@@ -6,7 +6,7 @@ import {StatContent} from "../../../core/interfaces/stat-content";
 import {SeriesOptionsType} from "highcharts";
 import {Router} from "@angular/router";
 import {CommonChartAbstract} from "../common-chart.abstract";
-import {buildSubtitle} from "../../../core/utils/functions";
+import {buildSubtitle, countMedals} from "../../../core/utils/functions";
 
 @Component({
   selector: "app-pie-chart",
@@ -34,7 +34,7 @@ export class PieChartComponent implements OnInit, CommonChartAbstract{
   getSeries(data: Olympic[]): SeriesOptionsType{
     const dataSeries: PieSerie[] = [];
       data.forEach((data: Olympic) => {
-        const medalsCount = data.participations.reduce((acc, participation) => acc + participation.medalsCount,0)
+        const medalsCount =  countMedals(data.participations);
         const serie: PieSerie = {
           id: data.id.toString(),
           name: data.country,
