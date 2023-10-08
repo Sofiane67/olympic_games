@@ -1,29 +1,50 @@
-# OlympicGamesStarter
+# Olympic Games App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+This guide provides step-by-step instructions on how to install and launch theOlympic Games App on your local system.
 
-Don't forget to install your node_modules before starting (`npm install`).
+## Prerequisites
 
-## Development server
+Before you begin, make sure you have the following installed on your system:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Node.js**: Download and install Node.js from [nodejs.org](https://nodejs.org/).
+- **Angular CLI**: Install Angular CLI by running the following command in your terminal:
 
-## Build
+   ```bash
+   npm install -g @angular/cli
+   ```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Application Installation
 
-## Where to start
+1. Clone the repository from GitHub using the following command in your terminal:
 
-As you can see, an architecture has already been defined for the project. It is just a suggestion, you can choose to use your own. The predefined architecture includes (in addition to the default angular architecture) the following:
+   ```bash
+   git clone <https://github.com/Sofiane67/olympic_games.git>
+   ```
 
-- `components` folder: contains every reusable components
-- `pages` folder: contains components used for routing
-- `core` folder: contains the business logic (`services` and `models` folders)
+2. Navigate to the application directory:
 
-I suggest you to start by understanding this starter code. Pay an extra attention to the `app-routing.module.ts` and the `olympic.service.ts`.
+   ```bash
+   cd folder-name
+   ```
 
-Once mastered, you should continue by creating the typescript interfaces inside the `models` folder. As you can see I already created two files corresponding to the data included inside the `olympic.json`. With your interfaces, improve the code by replacing every `any` by the corresponding interface.
+3. Install the dependencies by running the command:
 
-You're now ready to implement the requested features.
+   ```bash
+   npm install
+   ```
 
-Good luck!
+## Launching the Application
+
+Once the installation is complete, you can launch the application using the following command:
+
+```bash
+ng serve
+```
+
+The application will now be accessible at `http://localhost:4200/` in your browser.
+
+---
+
+Don't forget to check out the [official Angular documentation](https://angular.io/) for more information on Angular development.
+
+Thank you for using our application!
