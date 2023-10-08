@@ -115,7 +115,8 @@ export class LineChartComponent implements OnInit, CommonChartAbstract{
             enabled: false
           }
         }
-      }
+      },
+      series: [this.series]
     }
 
     return options

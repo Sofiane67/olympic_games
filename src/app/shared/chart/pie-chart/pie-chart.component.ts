@@ -3,7 +3,7 @@ import {Olympic} from "../../../core/models/Olympic";
 import {ChartType} from "../../../core/enums/chart-types.enum";
 import {PieSerie} from "../../../core/interfaces/series/pie-serie";
 import {StatContent} from "../../../core/interfaces/stat-content";
-import {SeriesOptionsType} from "highcharts";
+import {Options, SeriesOptionsType} from "highcharts";
 import {Router} from "@angular/router";
 import {CommonChartAbstract} from "../common-chart.abstract";
 import {buildSubtitle, countMedals} from "../../../core/utils/functions";
@@ -19,6 +19,7 @@ export class PieChartComponent implements OnInit, CommonChartAbstract{
   series: SeriesOptionsType = {} as SeriesOptionsType;
   title: string = "Medals per Country";
   subtitle: string = "";
+  options: Options = {} as Options
   numberOfJOs: number = 0;
   numberOfCountries: number = 0;
 
@@ -27,6 +28,7 @@ export class PieChartComponent implements OnInit, CommonChartAbstract{
   ngOnInit() {
     if(this.data){
       this.series = this.getSeries(this.data);
+      this.options = this.getChartOptions();
       this.subtitle = this.getSubtitles(this.getStats());
     }
   }
@@ -52,6 +54,9 @@ export class PieChartComponent implements OnInit, CommonChartAbstract{
           this.router.navigate(["/country", id])
         }
       },
+      style:{
+        cursor: "pointer"
+      }
     }
     return  series
   }
@@ -87,4 +92,19 @@ export class PieChartComponent implements OnInit, CommonChartAbstract{
       return 0
     }
   }
+
+  getChartOptions(): Options{
+    const options : Options = {
+      plotOptions: {
+        series: {
+          cursor: "pointer"
+        }
+      },
+      series: [this.series]
+
+    }
+    return options
+  }
+
+
 }

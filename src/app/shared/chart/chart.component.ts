@@ -10,10 +10,9 @@ import {ChartType} from "../../core/enums/chart-types.enum";
 export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
   chart: Chart | undefined;
   @Input() type!: ChartType;
-  @Input() series: SeriesOptionsType = {} as SeriesOptionsType;
   @Input() title: string | undefined;
   @Input() subtitle: string | undefined;
-  @Input() options?: Options;
+  @Input() options: Options | undefined;
   chartOptions! : Options
 
   constructor(private el: ElementRef) { }
@@ -42,11 +41,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
         text: `<div class="stats">${this.subtitle}</div>`,
         useHTML: true,
       },
-      series: [this.series]
-    }
-
-    if(this.options){
-      this.chartOptions = {...this.chartOptions, ...this.options};
+      ...this.options
     }
   }
 
