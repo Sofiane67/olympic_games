@@ -1,1 +1,11 @@
-<app-pie-chart *ngIf="olympics$ | async" [data]="olympics$ | async"></app-pie-chart>
+<div class="home">
+  <div class="home__title">
+    <app-title [title]="title"></app-title>
+  </div>
+  <div *ngIf="stats" class="home__stats">
+    <app-statistic [stats]="stats"></app-statistic>
+  </div>
+  <div class="home__chart">
+    <app-pie-chart *ngIf="olympics$ | async" [data]="olympics$ | async" (statsEventEmitter)="getStats($event)"></app-pie-chart>
+  </div>
+</div>

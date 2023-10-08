@@ -1,10 +1,10 @@
 import {CommonChartAbstract} from "../common-chart.abstract";
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Olympic} from "../../../core/models/Olympic";
 import {Options, SeriesOptionsType} from "highcharts";
 import {StatContent} from "../../../core/interfaces/stat-content";
 import {ChartType} from "../../../core/enums/chart-types.enum";
-import {buildSubtitle, countMedals} from "../../../core/utils/functions";
+import {countMedals} from "../../../core/utils/functions";
 
 @Component({
   selector: "app-line-chart",
@@ -15,20 +15,19 @@ export class LineChartComponent implements OnInit, CommonChartAbstract{
 
   @Input() data: Olympic | undefined;
   series: SeriesOptionsType = {} as SeriesOptionsType;
-  subtitle: string = "";
   title: string = "";
   type: ChartType = ChartType.Bar;
   options: Options = {} as Options
   categories: string[] = [];
+  @Output() statsEventEmitter = new EventEmitter<StatContent[]>()
 
   ngOnInit() {
     if(this.data){
       this.title = this.data.country;
       this.series = this.getSeries(this.data)
-      this.subtitle = this.getSubtitles(this.getStats());
       this.options = this.getChartOptions();
       this.categories = this.data.participations.map(part => part.year.toString())
-      console.log(this.data)
+      this.getStats();
     }
   }
 
@@ -42,8 +41,8 @@ export class LineChartComponent implements OnInit, CommonChartAbstract{
     }
   }
 
-  getStats(): StatContent[] {
-    return [
+  getStats(): void{
+    const stats =  [
       {
         title: "Number of entries",
         value: this.countEntries()
@@ -57,10 +56,8 @@ export class LineChartComponent implements OnInit, CommonChartAbstract{
         value: this.countTotalAthlete()
       }
     ];
-  }
 
-  getSubtitles(stats: StatContent[]): string {
-    return buildSubtitle(stats);
+    this.statsEventEmitter.emit(stats)
   }
 
   countEntries(){
@@ -92,7 +89,6 @@ export class LineChartComponent implements OnInit, CommonChartAbstract{
         },
         labels:{
           style:{
-            color: "red",
             fontSize: "1.6rem"
           }
         }
@@ -101,7 +97,6 @@ export class LineChartComponent implements OnInit, CommonChartAbstract{
         categories :["2012", "2016", "2020"],
         labels:{
           style:{
-            color: "red",
             fontSize: "1.6rem"
           }
         }

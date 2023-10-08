@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Olympic} from "../../../core/models/Olympic";
 import {ChartType} from "../../../core/enums/chart-types.enum";
 import {PieSerie} from "../../../core/interfaces/series/pie-serie";
@@ -18,10 +18,10 @@ export class PieChartComponent implements OnInit, CommonChartAbstract{
   type = ChartType.Pie;
   series: SeriesOptionsType = {} as SeriesOptionsType;
   title: string = "Medals per Country";
-  subtitle: string = "";
   options: Options = {} as Options
   numberOfJOs: number = 0;
   numberOfCountries: number = 0;
+  @Output() statsEventEmitter = new EventEmitter<StatContent[]>();
 
   constructor(private router: Router) {
   }
@@ -29,7 +29,7 @@ export class PieChartComponent implements OnInit, CommonChartAbstract{
     if(this.data){
       this.series = this.getSeries(this.data);
       this.options = this.getChartOptions();
-      this.subtitle = this.getSubtitles(this.getStats());
+      this.getStats();
     }
   }
 
@@ -61,11 +61,10 @@ export class PieChartComponent implements OnInit, CommonChartAbstract{
     return  series
   }
 
-  getStats(): StatContent[]{
+  getStats(): void{
     this.numberOfJOs = this.getNumberOfJOs();
     this.numberOfCountries = this.data!.length;
-
-    return  [
+    const stats = [
       {
         title: "Number of JOs",
         value: this.numberOfJOs
@@ -75,6 +74,8 @@ export class PieChartComponent implements OnInit, CommonChartAbstract{
         value: this.numberOfCountries
       },
     ]
+
+    this.statsEventEmitter.emit(stats)
   }
 
   getSubtitles(stats: StatContent[]): string{

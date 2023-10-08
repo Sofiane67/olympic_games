@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {OlympicService} from "../../core/services/olympic.service";
 import {Olympic} from "../../core/models/Olympic";
 import { Location } from '@angular/common';
+import {StatContent} from "../../core/interfaces/stat-content";
 
 @Component({
   selector: 'app-detail',
@@ -12,8 +13,10 @@ import { Location } from '@angular/common';
 export class DetailComponent implements OnInit {
   id: string | null = "";
   olympic: Olympic = {} as Olympic;
+  title: string = "";
+  stats: StatContent[] = [];
 
-  constructor(private route: ActivatedRoute, private olympicService: OlympicService, private location: Location) { }
+  constructor(private route: ActivatedRoute, private olympicService: OlympicService, private location: Location, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -24,5 +27,10 @@ export class DetailComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  getStats(stats: StatContent[]){
+    this.stats = stats;
+    this.cdr.detectChanges();
   }
 }

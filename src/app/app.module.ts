@@ -10,9 +10,22 @@ import { ChartComponent } from './shared/chart/chart.component';
 import {PieChartComponent} from "./shared/chart/pie-chart/pie-chart.component";
 import {DetailComponent} from "./pages/detail/detail.component";
 import {LineChartComponent} from "./shared/chart/line-chart/line-chart.component";
+import {StatisticComponent} from "./shared/component/statistic/statistic.component";
+import {TitleComponent} from "./shared/component/title/title.component";
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NotFoundComponent, HeaderComponent, ChartComponent, PieChartComponent, DetailComponent, LineChartComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    NotFoundComponent,
+    HeaderComponent,
+    ChartComponent,
+    PieChartComponent,
+    DetailComponent,
+    LineChartComponent,
+    StatisticComponent,
+    TitleComponent
+  ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],

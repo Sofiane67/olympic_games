@@ -1,8 +1,14 @@
 <div class="detail">
+  <div class="detail__title">
+    <app-title  *ngIf="olympic" [title]="olympic.country"></app-title>
+  </div>
+  <div *ngIf="stats" class="detail__stats">
+    <app-statistic [stats]="stats"></app-statistic>
+  </div>
   <div class="detail__back-button">
     <button (click)="goBack()"> <span>&larr;</span>  Back to home</button>
   </div>
   <div class="detail__chart">
-    <app-line-chart *ngIf="olympic" [data]="olympic"></app-line-chart>
+    <app-line-chart *ngIf="olympic" [data]="olympic" (statsEventEmitter)="getStats($event)"></app-line-chart>
   </div>
 </div>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
+import {StatContent} from "../../core/interfaces/stat-content";
 
 @Component({
   selector: 'app-home',
@@ -9,10 +10,18 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
 })
 export class HomeComponent implements OnInit {
   public olympics$: Observable<any> = of(null);
+  title: string = "";
+  stats: StatContent[] = [];
 
-  constructor(private olympicService: OlympicService) {}
+  constructor(private olympicService: OlympicService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
+    this.title = "Medals per Country";
+  }
+
+  getStats(stats: StatContent[]){
+    this.stats = stats;
+    this.cdr.detectChanges();
   }
 }

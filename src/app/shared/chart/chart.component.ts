@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit} from '@angular/core';
-import {Chart, Options, SeriesOptionsType} from "highcharts"
+import {Chart, Options} from "highcharts"
 import {ChartType} from "../../core/enums/chart-types.enum";
 
 @Component({
@@ -28,18 +28,10 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
         style: {
           fontFamily: "Raleway, sans-serif;",
           width: 100
-        }
+        },
       },
       title: {
-        text: `<h1 class="title">${this.title}</h1>`,
-        useHTML: true,
-        style: {
-          margin: 50
-        }
-      },
-      subtitle: {
-        text: `<div class="stats">${this.subtitle}</div>`,
-        useHTML: true,
+        text: ""
       },
       ...this.options
     }
