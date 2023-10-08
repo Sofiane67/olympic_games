@@ -2,13 +2,16 @@
   <p class="home__introduction">
     Discover nations performances at the Olympic Games. View the number of medals won by country, delve into nation-specific details, and track the evolution over the years. Immerse yourself in the Olympic spirit here! 🏅🌍
   </p>
-  <div class="home__title">
-    <app-title [title]="title"></app-title>
-  </div>
-  <div *ngIf="stats" class="home__stats">
-    <app-statistic [stats]="stats"></app-statistic>
-  </div>
-  <div class="home__chart">
-    <app-pie-chart *ngIf="olympics$ | async" [data]="olympics$ | async" (statsEventEmitter)="getStats($event)"></app-pie-chart>
-  </div>
+  <app-loader *ngIf="!loading"></app-loader>
+  <ng-container *ngIf="loading">
+    <div class="home__title">
+      <app-title [title]="title"></app-title>
+    </div>
+    <div *ngIf="stats" class="home__stats">
+      <app-statistic [stats]="stats"></app-statistic>
+    </div>
+    <div class="home__chart">
+      <app-pie-chart [data]="olympics$ | async" (statsEventEmitter)="getStats($event)"></app-pie-chart>
+    </div>
+  </ng-container>
 </div>

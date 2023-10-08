@@ -12,6 +12,7 @@ import {DetailComponent} from "./pages/detail/detail.component";
 import {LineChartComponent} from "./shared/chart/line-chart/line-chart.component";
 import {StatisticComponent} from "./shared/component/statistic/statistic.component";
 import {TitleComponent} from "./shared/component/title/title.component";
+import {LoaderComponent} from "./shared/component/loader/loader.component";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {TitleComponent} from "./shared/component/title/title.component";
     DetailComponent,
     LineChartComponent,
     StatisticComponent,
-    TitleComponent
+    TitleComponent,
+    LoaderComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],

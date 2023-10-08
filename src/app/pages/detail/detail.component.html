@@ -1,14 +1,20 @@
 <div class="detail">
-  <div class="detail__title">
-    <app-title  *ngIf="olympic" [title]="olympic.country"></app-title>
+  <app-loader *ngIf="!loading && !error"></app-loader>
+  <div class="detail__error" *ngIf="!loading && error">
+    <app-not-found></app-not-found>
   </div>
-  <div *ngIf="stats" class="detail__stats">
-    <app-statistic [stats]="stats"></app-statistic>
-  </div>
-  <div class="detail__back-button">
-    <button (click)="goBack()"> <span>&larr;</span>  Back to home</button>
-  </div>
-  <div class="detail__chart">
-    <app-line-chart *ngIf="olympic" [data]="olympic" (statsEventEmitter)="getStats($event)"></app-line-chart>
-  </div>
+  <ng-container  *ngIf="loading">
+    <div class="detail__title">
+      <app-title  *ngIf="olympic" [title]="olympic.country"></app-title>
+    </div>
+    <div *ngIf="stats" class="detail__stats">
+      <app-statistic [stats]="stats"></app-statistic>
+    </div>
+    <div class="detail__back-button">
+      <button (click)="goBack()"> <span>&larr;</span>  Back to home</button>
+    </div>
+    <div class="detail__chart">
+      <app-line-chart *ngIf="olympic" [data]="olympic" (statsEventEmitter)="getStats($event)"></app-line-chart>
+    </div>
+  </ng-container>
 </div>

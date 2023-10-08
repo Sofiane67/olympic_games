@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, map} from 'rxjs';
+import {BehaviorSubject, map, throwError} from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import {Olympic} from "../models/Olympic";
 
@@ -36,8 +36,16 @@ export class OlympicService {
     return this.getOlympics().pipe(
       map(olympics => {
         if(olympics){
-          return olympics.find((olympic: Olympic) => olympic.id === id);
+          const olympic =  olympics.find((olympic: Olympic) => olympic.id === id);
+          if(olympic){
+            return olympic
+          }else{
+            throw new Error('Data not found');
+          }
         }
+      }),
+      catchError(error => {
+        return throwError(error.message);
       })
     )
   }
