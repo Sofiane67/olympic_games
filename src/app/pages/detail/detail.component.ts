@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ChartType} from "../../core/enums/chart-types.enum";
-import {SeriesOptionsType} from "highcharts";
 import {ActivatedRoute} from "@angular/router";
 import {OlympicService} from "../../core/services/olympic.service";
 import {Olympic} from "../../core/models/Olympic";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-detail',
@@ -14,7 +13,7 @@ export class DetailComponent implements OnInit {
   id: string | null = "";
   olympic: Olympic = {} as Olympic;
 
-  constructor(private route: ActivatedRoute, private olympicService: OlympicService) { }
+  constructor(private route: ActivatedRoute, private olympicService: OlympicService, private location: Location) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -23,4 +22,7 @@ export class DetailComponent implements OnInit {
     }
   }
 
+  goBack(): void {
+    this.location.back();
+  }
 }

@@ -1,1 +1,8 @@
-<app-line-chart *ngIf="olympic" [data]="olympic"></app-line-chart>
+<div class="detail">
+  <div class="detail__back-button">
+    <button (click)="goBack()"> <span>&larr;</span>  Back to home</button>
+  </div>
+  <div class="detail__chart">
+    <app-line-chart *ngIf="olympic" [data]="olympic"></app-line-chart>
+  </div>
+</div>
