@@ -123,6 +123,13 @@ export class PieChartComponent implements OnInit, CommonChartAbstract{
         className: "pie-tooltip"
       },
       plotOptions: {
+        pie:{
+          dataLabels: {
+            style: {
+              fontSize: "1.3rem"
+            }
+          }
+        },
         series: {
           cursor: "pointer"
         }
