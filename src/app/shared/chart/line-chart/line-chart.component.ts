@@ -4,7 +4,7 @@ import {Olympic} from "../../../core/models/Olympic";
 import {Options, SeriesOptionsType} from "highcharts";
 import {StatContent} from "../../../core/interfaces/stat-content";
 import {ChartType} from "../../../core/enums/chart-types.enum";
-import {countMedals} from "../../../core/utils/functions";
+import {countMedals, getIconPath} from "../../../core/utils/functions";
 
 @Component({
   selector: "app-line-chart",
@@ -34,7 +34,6 @@ export class LineChartComponent implements OnInit, CommonChartAbstract{
 
   getSeries(data: Olympic): SeriesOptionsType {
     const serie = data.participations.map(participation => participation.medalsCount)
-    console.log(serie)
     return {
       type: this.type,
       data: serie,
@@ -103,6 +102,24 @@ export class LineChartComponent implements OnInit, CommonChartAbstract{
       },
       legend: {
         enabled: false
+      },
+      tooltip: {
+        useHTML: true,
+        formatter: function (){
+          const {category, y: totalMedals} = this.point;
+          return `<div>
+                    <div>
+                        <span>Year : </span><span style="font-weight: bold">${category}</span>
+                    </div>
+                    <div>
+                        <span>Medals : </span><span style="font-weight: bold">${totalMedals}</span>
+                    </div>
+                </div>`
+        },
+        borderRadius: 10,
+        style:{
+          fontSize: "1.8rem",
+        }
       },
       plotOptions: {
         series: {
