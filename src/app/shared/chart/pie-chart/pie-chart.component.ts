@@ -6,7 +6,7 @@ import {StatContent} from "../../../core/interfaces/stat-content";
 import {Options, SeriesOptionsType} from "highcharts";
 import {Router} from "@angular/router";
 import {CommonChartAbstract} from "../common-chart.abstract";
-import {buildSubtitle, countMedals} from "../../../core/utils/functions";
+import {buildSubtitle, countMedals, getIconPath} from "../../../core/utils/functions";
 
 @Component({
   selector: "app-pie-chart",
@@ -95,6 +95,32 @@ export class PieChartComponent implements OnInit, CommonChartAbstract{
 
   getChartOptions(): Options{
     const options : Options = {
+      tooltip: {
+        backgroundColor: "#04838F",
+        useHTML: true,
+        formatter: function (){
+          const {name: country, y: totalMedals} = this.point.options;
+          const medalIcon = getIconPath("medal-solid.svg");
+          const markerIcon = getIconPath("arrow-solid.svg");
+          return `<div class="pie-tooltip__box">
+            <div class="pie-tooltip__title">${country}</div>
+            <div class="pie-tooltip__body">
+                <div class="pie-tooltip__icon">
+                    <img src="${medalIcon}" />
+                </div>
+                <span class="pie-tooltip__countMedal">${totalMedals}</span>
+            </div>
+            <img src="${markerIcon}" class="pie-tooltip__marker"/>
+        </div>`
+        },
+        shadow: false,
+        borderColor: "none",
+        borderRadius: 10,
+        style:{
+          color: "#FFFFFF",
+        },
+        className: "pie-tooltip"
+      },
       plotOptions: {
         series: {
           cursor: "pointer"
