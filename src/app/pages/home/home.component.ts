@@ -2,6 +2,7 @@ import {Component, OnInit, ChangeDetectorRef, OnDestroy} from '@angular/core';
 import {Observable, of, Subject, Subscription} from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import {StatContent} from "../../core/interfaces/stat-content";
+import {Olympic} from "../../core/models/Olympic";
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import {StatContent} from "../../core/interfaces/stat-content";
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  public olympics$: Observable<any> = of(null);
+  public olympics$: Observable<Olympic[] | null> = of(null);
   sub: Subscription | undefined;
   title: string = "";
   stats: StatContent[] = [];

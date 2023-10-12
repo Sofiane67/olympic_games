@@ -31,7 +31,6 @@ export class LineChartComponent implements OnInit, CommonChartAbstract{
     }
   }
 
-
   getSeries(data: Olympic): SeriesOptionsType {
     const serie = data.participations.map(participation => participation.medalsCount)
     return {

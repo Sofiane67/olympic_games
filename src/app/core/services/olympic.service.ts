@@ -9,7 +9,7 @@ import {Olympic} from "../models/Olympic";
 })
 export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json';
-  private olympics$ = new BehaviorSubject<any>(undefined);
+  private olympics$ = new BehaviorSubject<Olympic[] | null>(null);
 
   constructor(private http: HttpClient) {
     this.loadInitialData();
@@ -43,6 +43,7 @@ export class OlympicService {
             throw new Error('Data not found');
           }
         }
+        return null;
       }),
       catchError(error => {
         return throwError(error.message);

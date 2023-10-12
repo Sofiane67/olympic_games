@@ -78,10 +78,6 @@ export class PieChartComponent implements OnInit, CommonChartAbstract{
     this.statsEventEmitter.emit(stats)
   }
 
-  getSubtitles(stats: StatContent[]): string{
-    return buildSubtitle(stats)
-  }
-
   getNumberOfJOs(): number{
     if(this.data){
       const numberOfParticipationPerCountry: number[] = [];

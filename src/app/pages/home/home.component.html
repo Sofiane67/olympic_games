@@ -11,7 +11,9 @@
       <app-statistic [stats]="stats"></app-statistic>
     </div>
     <div class="home__chart">
-      <app-pie-chart [data]="olympics$ | async" (statsEventEmitter)="getStats($event)"></app-pie-chart>
+      <ng-container *ngIf="(olympics$ | async) as olympics">
+        <app-pie-chart [data]="olympics" (statsEventEmitter)="getStats($event)"></app-pie-chart>
+      </ng-container>
     </div>
   </ng-container>
 </div>
