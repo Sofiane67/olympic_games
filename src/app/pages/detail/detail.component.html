@@ -14,7 +14,7 @@
       <button (click)="goBack()"> <span>&larr;</span>  Back to home</button>
     </div>
     <div class="detail__chart">
-      <app-line-chart *ngIf="olympic" [data]="olympic" (statsEventEmitter)="getStats($event)"></app-line-chart>
+      <app-bar-chart *ngIf="olympic" [data]="olympic" (statsEventEmitter)="getStats($event)"></app-bar-chart>
     </div>
   </ng-container>
 </div>

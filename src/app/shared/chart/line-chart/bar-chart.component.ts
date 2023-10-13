@@ -7,11 +7,11 @@ import {ChartType} from "../../../core/enums/chart-types.enum";
 import {countMedals, getIconPath} from "../../../core/utils/functions";
 
 @Component({
-  selector: "app-line-chart",
-  templateUrl: "line-chart.component.html",
-  styleUrls: ["line-chart.component.scss"]
+  selector: "app-bar-chart",
+  templateUrl: "bar-chart.component.html",
+  styleUrls: ["bar-chart.component.scss"]
 })
-export class LineChartComponent implements OnInit, CommonChartAbstract{
+export class BarChartComponent implements OnInit, CommonChartAbstract{
 
   @Input() data: Olympic | undefined;
   series: SeriesOptionsType = {} as SeriesOptionsType;
@@ -92,12 +92,13 @@ export class LineChartComponent implements OnInit, CommonChartAbstract{
         }
       },
       xAxis: {
-        categories :["2012", "2016", "2020"],
+        categories :["2020", "2016", "2012"],
+        reversed: true,
         labels:{
           style:{
-            fontSize: "1.6rem"
-          }
-        }
+            fontSize: "1.6rem",
+          },
+        },
       },
       legend: {
         enabled: false
