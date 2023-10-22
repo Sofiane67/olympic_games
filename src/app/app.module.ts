@@ -9,7 +9,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { ChartComponent } from './shared/chart/chart.component';
 import {PieChartComponent} from "./shared/chart/pie-chart/pie-chart.component";
 import {DetailComponent} from "./pages/detail/detail.component";
-import {BarChartComponent} from "./shared/chart/line-chart/bar-chart.component";
+import {BarChartComponent} from "./shared/chart/bar-chart/bar-chart.component";
 import {StatisticComponent} from "./shared/component/statistic/statistic.component";
 import {TitleComponent} from "./shared/component/title/title.component";
 import {LoaderComponent} from "./shared/component/loader/loader.component";

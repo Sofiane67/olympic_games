@@ -6,7 +6,7 @@ import {StatContent} from "../../../core/interfaces/stat-content";
 import {Options, SeriesOptionsType} from "highcharts";
 import {Router} from "@angular/router";
 import {CommonChartAbstract} from "../common-chart.abstract";
-import {buildSubtitle, countMedals, getIconPath} from "../../../core/utils/functions";
+import {countMedals, getIconPath} from "../../../core/utils/functions";
 
 @Component({
   selector: "app-pie-chart",
@@ -15,13 +15,13 @@ import {buildSubtitle, countMedals, getIconPath} from "../../../core/utils/funct
 })
 export class PieChartComponent implements OnInit, CommonChartAbstract{
   @Input() data: Olympic[] | undefined;
-  type = ChartType.Pie;
+  type: ChartType = ChartType.Pie;
   series: SeriesOptionsType = {} as SeriesOptionsType;
   title: string = "Medals per Country";
   options: Options = {} as Options
   numberOfJOs: number = 0;
   numberOfCountries: number = 0;
-  @Output() statsEventEmitter = new EventEmitter<StatContent[]>();
+  @Output() statsEventEmitter: EventEmitter<StatContent[]> = new EventEmitter<StatContent[]>();
 
   constructor(private router: Router) {
   }

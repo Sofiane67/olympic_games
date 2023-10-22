@@ -32,9 +32,15 @@ export class OlympicService {
     return this.olympics$.asObservable();
   }
 
+  /**
+   * Retrieves data from a country based on its identifier
+   * @param {number} id - Country ID
+   * @returns {Observable<Olympic>} - Returns the Olympic object corresponding to the id
+   * @throws {Error} - Return an error if no data
+   */
   getOlympicById(id: number){
     return this.getOlympics().pipe(
-      map(olympics => {
+      map((olympics: Olympic[]|null) => {
         if(olympics){
           const olympic =  olympics.find((olympic: Olympic) => olympic.id === id);
           if(olympic){
